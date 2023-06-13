@@ -11,6 +11,23 @@
   color: antiquewhite;
 }
 
+.header-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  margin: 10px;
+  background-color: palevioletred;
+  border-radius: 3px;
+  border: none;
+  padding: 3px;
+  width: 50px;
+  color: antiquewhite
+}
+
 .hidden {
   display: "none";
 }
