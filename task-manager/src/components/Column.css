@@ -1,0 +1,12 @@
+.column {
+  background-color: rebeccapurple;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 20rem;
+  width: 30%;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  color: antiquewhite;
+}
