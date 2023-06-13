@@ -10,3 +10,7 @@
   margin: 10px;
   color: antiquewhite;
 }
+
+.hidden {
+  display: "none";
+}

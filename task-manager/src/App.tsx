@@ -1,11 +1,12 @@
 import "./App.css";
 import Column from "./components/Column";
+import { Statuses } from "./constants/statuses";
 
 const App = () => (
   <div className="App">
-    <Column state="PLANNED" />
-    <Column state="ONGOING" />
-    <Column state="DONE" />
+    <Column state={Statuses.PLANNED} />
+    <Column state={Statuses.ONGOING} />
+    <Column state={Statuses.DONE} />
   </div>
 );
 
