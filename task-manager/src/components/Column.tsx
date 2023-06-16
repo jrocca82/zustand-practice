@@ -1,8 +1,9 @@
-import { DragEventHandler, MouseEventHandler } from "react";
+import { DragEventHandler, MouseEventHandler, useState } from "react";
 import { Statuses } from "../constants/statuses";
 import { useTaskStore } from "../store";
 import "./styles/Column.css";
 import Task from "./Task";
+import classNames from "classnames";
 
 const Column = ({
   state,
@@ -11,6 +12,8 @@ const Column = ({
   state: Statuses;
   openAddTaskModal?: MouseEventHandler<HTMLButtonElement>;
 }) => {
+  const [dropping, setDropping] = useState<boolean>(false);
+
   const tasks = useTaskStore((store) =>
     store.tasks.filter((task) => task.state === state)
   );
@@ -21,6 +24,12 @@ const Column = ({
 
   const onDragOver: DragEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
+    setDropping(true);
+  };
+
+  const onDragLeave: DragEventHandler<HTMLDivElement> = (e) => {
+    e.preventDefault();
+    setDropping(false);
   };
 
   const onDrop: DragEventHandler<HTMLDivElement> = (e) => {
@@ -29,10 +38,16 @@ const Column = ({
     }
     moveTask(draggedTask, state);
     setDraggedTask(undefined);
+    setDropping(false);
   };
 
   return (
-    <div className="column" onDragOver={onDragOver} onDrop={onDrop}>
+    <div
+      className={classNames("column", {dropping: dropping})}
+      onDragOver={onDragOver}
+      onDrop={onDrop}
+      onDragLeave={onDragLeave}
+    >
       <div className="header-wrapper">
         <h3>{state}</h3>
         {state === Statuses.PLANNED ? (

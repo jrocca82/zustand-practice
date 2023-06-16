@@ -9,6 +9,11 @@
   border-radius: 10px;
   margin: 10px;
   color: antiquewhite;
+  border: solid 3px transparent;
+}
+
+.column.dropping {
+  border-color: antiquewhite;
 }
 
 .header-wrapper {
