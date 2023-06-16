@@ -1,0 +1,29 @@
+.modal {
+  position: absolute;
+  width: 300px;
+  z-index: 10;
+  background-color: antiquewhite;
+  align-self: center;
+  justify-self: center;
+  padding: 20px;
+  border-radius: 20px;
+  height: 300px;
+}
+
+.modalContent {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.exitButtonWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modalExitButton {
+  width: 30px;
+}

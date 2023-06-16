@@ -13,7 +13,7 @@
 
 .header-wrapper {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
 }
@@ -24,8 +24,13 @@ button {
   border-radius: 3px;
   border: none;
   padding: 3px;
-  width: 50px;
-  color: antiquewhite
+  width: 100px;
+  color: antiquewhite;
+}
+
+button:hover {
+  background-color: darkorchid;
+  cursor: pointer;
 }
 
 .hidden {

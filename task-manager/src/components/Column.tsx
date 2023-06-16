@@ -1,9 +1,19 @@
+import { Dispatch, MouseEventHandler, SetStateAction, useState } from "react";
 import { Statuses } from "../constants/statuses";
 import { useTaskStore } from "../store";
-import "./Column.css";
+import "./styles/Column.css";
 import Task from "./Task";
+import Modal from "./AddTaskModal";
 
-const Column = ({ state }: { state: Statuses }) => {
+const Column = ({
+  state,
+  openAddTaskModal,
+  openRemoveTaskModal,
+}: {
+  state: Statuses;
+  openAddTaskModal?: MouseEventHandler<HTMLButtonElement>;
+  openRemoveTaskModal: MouseEventHandler<HTMLDivElement>;
+}) => {
   const tasks = useTaskStore((store) =>
     store.tasks.filter((task) => task.state === state)
   );
@@ -13,13 +23,13 @@ const Column = ({ state }: { state: Statuses }) => {
       <div className="header-wrapper">
         <h3>{state}</h3>
         {state === Statuses.PLANNED ? (
-          <button>+ Add</button>
+          <button onClick={openAddTaskModal}>+ Add New</button>
         ) : (
           <div className="hidden" />
         )}
       </div>
-      {tasks.map((task) => (
-        <Task key={task.title} status={task.state} title={task.title} />
+      {tasks.map((task, i) => (
+        <Task openRemoveTaskModal={openRemoveTaskModal} key={i} task={task} />
       ))}
     </div>
   );

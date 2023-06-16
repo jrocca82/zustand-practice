@@ -4,8 +4,19 @@
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
+  flex-flow: row wrap;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+}
+
+.AppHeader {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  color: antiquewhite;
+  margin-bottom: -150px;
 }
 
 * {

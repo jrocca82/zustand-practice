@@ -5,6 +5,7 @@
   border-radius: 10px;
   display: flex;
   flex-flow: row wrap;
+  margin: 10px;
 }
 
 .task {
@@ -36,6 +37,7 @@
   padding: 5px;
   border-radius: 5px;
   width: 20%;
+  cursor: pointer;
 }
 
 .PLANNED {
