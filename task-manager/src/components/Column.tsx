@@ -1,25 +1,38 @@
-import { Dispatch, MouseEventHandler, SetStateAction, useState } from "react";
+import { DragEventHandler, MouseEventHandler } from "react";
 import { Statuses } from "../constants/statuses";
 import { useTaskStore } from "../store";
 import "./styles/Column.css";
 import Task from "./Task";
-import Modal from "./AddTaskModal";
 
 const Column = ({
   state,
   openAddTaskModal,
-  openRemoveTaskModal,
 }: {
   state: Statuses;
   openAddTaskModal?: MouseEventHandler<HTMLButtonElement>;
-  openRemoveTaskModal: MouseEventHandler<HTMLDivElement>;
 }) => {
   const tasks = useTaskStore((store) =>
     store.tasks.filter((task) => task.state === state)
   );
 
+  const setDraggedTask = useTaskStore((store) => store.setDraggedTask);
+  const draggedTask = useTaskStore((store) => store.draggedTask);
+  const moveTask = useTaskStore((store) => store.moveTask);
+
+  const onDragOver: DragEventHandler<HTMLDivElement> = (e) => {
+    e.preventDefault();
+  };
+
+  const onDrop: DragEventHandler<HTMLDivElement> = (e) => {
+    if (!draggedTask) {
+      return;
+    }
+    moveTask(draggedTask, state);
+    setDraggedTask(undefined);
+  };
+
   return (
-    <div className="column">
+    <div className="column" onDragOver={onDragOver} onDrop={onDrop}>
       <div className="header-wrapper">
         <h3>{state}</h3>
         {state === Statuses.PLANNED ? (
@@ -29,7 +42,7 @@ const Column = ({
         )}
       </div>
       {tasks.map((task, i) => (
-        <Task openRemoveTaskModal={openRemoveTaskModal} key={i} task={task} />
+        <Task key={i} task={task} />
       ))}
     </div>
   );

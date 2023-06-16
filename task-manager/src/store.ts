@@ -1,3 +1,4 @@
+// @ts-ignore-- weird zustand problems
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { Statuses } from "./constants/statuses";
@@ -10,7 +11,10 @@ export interface TaskState {
 export const useTaskStore = create<{
   tasks: TaskState[];
   addTask: (title: string) => void;
-  removeTask: (index: number) => void;
+  removeTask: (title: string) => void;
+  draggedTask: string | undefined; // the title of the task being dragged
+  setDraggedTask: (title: string | undefined) => void;
+  moveTask: (title: string, state: Statuses) => void;
 }>()(
   devtools(
     persist(
@@ -38,10 +42,27 @@ export const useTaskStore = create<{
               { title: newTitle, state: Statuses.PLANNED },
             ],
           })),
-        // TODO: Remove a task from existing state
-        removeTask: (index: number) =>
+        // Remove task from existing state
+        removeTask: (title: string) =>
           set((store) => ({
-            tasks: [...store.tasks].splice(index, 1),
+            tasks: store.tasks.filter((task) => task.title !== title),
+          })),
+        // Move tasks and update state
+        draggedTask: undefined,
+        setDraggedTask: (title: string | undefined) =>
+          set({
+            draggedTask: title,
+          }),
+        moveTask: (title: string, state: Statuses) =>
+          set((store) => ({
+            tasks: store.tasks.map((task) =>
+              task.title === title
+                ? {
+                    title,
+                    state
+                  }
+                : task
+            ),
           })),
       }),
       {
