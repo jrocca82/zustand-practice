@@ -20,20 +20,7 @@ export const useTaskStore = create<{
     persist(
       (set) => ({
         // Initial state of tasks
-        tasks: [
-          {
-            title: "Test test 123",
-            state: Statuses.PLANNED,
-          },
-          {
-            title: "Test test 456",
-            state: Statuses.ONGOING,
-          },
-          {
-            title: "Test test 678",
-            state: Statuses.DONE,
-          },
-        ],
+        tasks: [],
         // Add a task to existing state
         addTask: (newTitle: string) =>
           set((store) => ({
@@ -59,7 +46,7 @@ export const useTaskStore = create<{
               task.title === title
                 ? {
                     title,
-                    state
+                    state,
                   }
                 : task
             ),
