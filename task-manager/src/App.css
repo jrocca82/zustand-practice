@@ -17,8 +17,21 @@
   align-items: center;
   color: antiquewhite;
   margin-bottom: -150px;
+  padding: 20px;
 }
 
 * {
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 720px) {
+  .App {
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .AppHeader {
+    margin-bottom: 0
+  }
 }

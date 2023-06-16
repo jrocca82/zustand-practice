@@ -41,3 +41,9 @@ button:hover {
 .hidden {
   display: "none";
 }
+
+@media screen and (max-width: 720px) {
+  .column {
+    width: 80%
+  }
+}
